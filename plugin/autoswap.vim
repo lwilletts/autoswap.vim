@@ -1,5 +1,5 @@
-" Vim global plugin for automating response to swapfiles
-" Maintainer: Gioele Barabucci
+" Vim global plugin for automating response to swapfiles for wmutils
+" Maintainer: Laurence Willetts
 " Author:     Damian Conway
 " License:    This is free software released into the public domain (CC0 license).
 
@@ -112,7 +112,7 @@ endfunction
 " LINUX: Detection function for Linux, uses mwctrl
 function! AS_DetectActiveWindow_Linux (filename)
 	let shortname = fnamemodify(a:filename,":t")
-	let find_win_cmd = 'wmctrl -l | grep -i " '.shortname.' .*vim" | tail -n1 | cut -d" " -f1'
+	let find_win_cmd = 'wmctrl -l | grep -i "vim: '.shortname.'" | head -n 1 | cut -d" " -f1'
 	let active_window = system(find_win_cmd)
 	return (active_window =~ '0x' ? active_window : "")
 endfunction
